@@ -10,6 +10,8 @@
 
       var options = ["rock", "paper", "scissors"];
       var result;
+      var playerScore = 0;
+      var compScore = 0;
 
 
 // Generate random play for computer
@@ -28,25 +30,18 @@
         return string.charAt(0).toUpperCase() + string.slice(1);
       }
 
-// Compare user input vs computer option
+// Compare user input vs computer option, and keep score
 
       function playRound (playerSelection, compSelection) {
 
           console.log("You picked " + playerSelection + "!");
           console.log("The computer picked " + compSelection + "!");
 
-          if ((playerSelection == "rock") && (compSelection == "scissors")) {
+          if (playerSelection == "rock" && compSelection == "scissors" ||
+              playerSelection == "paper" && compSelection == "rock" ||
+              playerSelection == "scissors" && compSelection =="paper") {
                  result = "You win! " + capFirstLetter(playerSelection) + " beats " + compSelection + "!";
-                 return result;
-          }
-
-          else if ((playerSelection == "paper") && (compSelection == "rock")) {
-                 result = "You win! " + capFirstLetter(playerSelection) + " beats " + compSelection + "!";
-                 return result;
-          }
-
-          else if ((playerSelection == "scissors") && (compSelection == "paper")) {
-                 result = "You win! " + capFirstLetter(playerSelection) + " beats " + compSelection + "!";
+                 playerScore += 1;
                  return result;
           }
 
@@ -57,21 +52,48 @@
 
           else {
                 result = "You lose this round. " + capFirstLetter(playerSelection) + " doesn't beat " + compSelection + ".";
+                compScore += 1;
                 return result;
             }
           
       }
 
 
-    const playerSelection = playerInput();
-    const compSelection = computerPlay();
+    var playerSelection;
+    var compSelection;
 
-// Play a round
+// Plays game, loops until someone reaches 5 points
 
-    console.log(playRound(playerSelection, compSelection));
+    function game() {
 
-// Write game() function to keep track of the status
+      do {
+        
+        if (playerScore == 5) {
+          console.log("You win!");
+          break;
+        }
 
+        else if (compScore == 5) {
+          console.log("You lose! Better luck next time.");
+          break;
+        }
+
+        else {
+          playerSelection = playerInput();
+          compSelection = computerPlay();
+          console.log(playRound(playerSelection, compSelection));
+          console.log("Player Score: " + playerScore);
+          console.log("Computer Score: " + compScore);
+        }
+
+      }
+
+      while (playerScore < 5 || compScore < 5);
+
+    }
+
+    game();
+    
   </script>
 
 </body>
