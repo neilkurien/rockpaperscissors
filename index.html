@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper, Scissor</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+
+  <script>
+
+      var options = ["rock", "paper", "scissors"];
+      var result;
+
+
+// Generate random play for computer
+
+      function computerPlay() {
+        return options[Math.floor(Math.random() * 3)];
+      }
+
+// Take user input
+
+      function playerInput() {
+        return prompt("What's it going to be? Rock, paper, scissors?").toLowerCase();
+      }
+
+      function capFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+
+// Compare user input vs computer option
+
+      function playRound (playerSelection, compSelection) {
+
+          console.log("You picked " + playerSelection + "!");
+          console.log("The computer picked " + compSelection + "!");
+
+          if ((playerSelection == "rock") && (compSelection == "scissors")) {
+                 result = "You win! " + capFirstLetter(playerSelection) + " beats " + compSelection + "!";
+                 return result;
+          }
+
+          else if ((playerSelection == "paper") && (compSelection == "rock")) {
+                 result = "You win! " + capFirstLetter(playerSelection) + " beats " + compSelection + "!";
+                 return result;
+          }
+
+          else if ((playerSelection == "scissors") && (compSelection == "paper")) {
+                 result = "You win! " + capFirstLetter(playerSelection) + " beats " + compSelection + "!";
+                 return result;
+          }
+
+          else if (playerSelection == compSelection) {
+                 result = "It's a draw! You both played " + compSelection + "!";
+                 return result;
+          }
+
+          else {
+                result = "You lose this round. " + capFirstLetter(playerSelection) + " doesn't beat " + compSelection + ".";
+                return result;
+            }
+          
+      }
+
+
+    const playerSelection = playerInput();
+    const compSelection = computerPlay();
+
+// Play a round
+
+    console.log(playRound(playerSelection, compSelection));
+
+// Write game() function to keep track of the status
+
+  </script>
+
+</body>
+</html>
